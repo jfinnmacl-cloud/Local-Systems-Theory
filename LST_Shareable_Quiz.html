@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systems Thinking Assessment - 15 Questions</title>
+    <meta property="og:title" content="Systems Thinking Assessment - Find Your Learning Track">
+    <meta property="og:description" content="Take this 15-question assessment to discover if you think in systems or just think you do. Get your personalized track for Local Systems Theory.">
+    <meta property="og:image" content="https://localsystems.theory/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(31, 31, 31, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3);
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid #8b5cf6;
+            border-radius: 8px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question {
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .question.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-number {
+            font-size: 0.9rem;
+            color: #8b5cf6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #f0f0f0;
+        }
+        
+        .option {
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.2);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        
+        .btn-secondary:hover {
+            background: #3a3a3a;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .email-section {
+            display: none;
+            padding: 2rem;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+        }
+        
+        .email-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        input {
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #1a1a1a;
+            border: 2px solid #3a3a3a;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        
+        .result {
+            display: none;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+        
+        .result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-low {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1));
+            border: 3px solid #10b981;
+        }
+        
+        .result-medium {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1));
+            border: 3px solid #f59e0b;
+        }
+        
+        .result-high {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.1));
+            border: 3px solid #ec4899;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        .share-twitter { background: #1da1f2; }
+        .share-linkedin { background: #0077b5; }
+        .share-facebook { background: #1877f2; }
+        .share-whatsapp { background: #25D366; }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Systems Thinking Assessment</h1>
+        <div class="intro">
+            <p><strong>15 questions</strong> to discover if you think in systems or just think you do.</p>
+            <p style="margin-top: 0.5rem;">Get your personalized learning track for <strong>Local Systems Theory</strong>.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        
+        <div id="quiz-container">
+            <!-- Questions will be dynamically generated -->
+        </div>
+        
+        <div class="nav-buttons" id="nav-buttons">
+            <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" style="display: none;">← Previous</button>
+            <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()">Next →</button>
+        </div>
+        
+        <div class="email-section" id="email-section">
+            <h2 style="margin-bottom: 1rem;">📧 Get Your Results</h2>
+            <p style="margin-bottom: 1rem;">Enter your details to see your learning track and receive course information.</p>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <button class="btn btn-primary" onclick="submitQuiz()" style="width: 100%; margin-top: 1rem;">See My Results</button>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="result-title" id="result-title"></div>
+            <div id="result-content"></div>
+            
+            <div class="share-buttons">
+                <a href="#" class="share-btn share-twitter" id="share-twitter" target="_blank">Twitter</a>
+                <a href="#" class="share-btn share-linkedin" id="share-linkedin" target="_blank">LinkedIn</a>
+                <a href="#" class="share-btn share-facebook" id="share-facebook" target="_blank">Facebook</a>
+                <a href="#" class="share-btn share-whatsapp" id="share-whatsapp" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "When you encounter a large, complex system, your first instinct is to:",
+                options: [
+                    { text: "Try to understand all its components before making judgments", value: 1 },
+                    { text: "Look for what would break if it were made smaller", value: 2 },
+                    { text: "Question whether its complexity is necessary or structural insulation", value: 3 }
+                ]
+            },
+            {
+                text: "In your view, friction in a system is primarily:",
+                options: [
+                    { text: "Something to eliminate for efficiency", value: 1 },
+                    { text: "A sign that something needs fixing", value: 2 },
+                    { text: "Information about where the system resists change for a reason", value: 3 }
+                ]
+            },
+            {
+                text: "When a system fails, you believe the most valuable information comes from:",
+                options: [
+                    { text: "Post-mortem analysis of what went wrong", value: 1 },
+                    { text: "Understanding what broke first and why", value: 2 },
+                    { text: "Observing who adapted and how the system tried to repair itself", value: 3 }
+                ]
+            },
+            {
+                text: "You're designing a system for 100 people. Your approach is to:",
+                options: [
+                    { text: "Design for 100 people from the start", value: 1 },
+                    { text: "Design for 10 people and plan how to scale", value: 2 },
+                    { text: "Design for 5 people and see what breaks when expanded", value: 3 }
+                ]
+            },
+            {
+                text: "Distance between decision-makers and those affected by decisions is:",
+                options: [
+                    { text: "Sometimes necessary for objectivity", value: 1 },
+                    { text: "A practical constraint of large organizations", value: 2 },
+                    { text: "A structural mechanism that degrades truth", value: 3 }
+                ]
+            },
+            {
+                text: "When evaluating if a system is working, you prioritize:",
+                options: [
+                    { text: "Metrics and KPIs that show performance", value: 1 },
+                    { text: "User feedback and satisfaction scores", value: 2 },
+                    { text: "Whether it survives without the designer's intervention", value: 3 }
+                ]
+            },
+            {
+                text: "Governance in a system should be:",
+                options: [
+                    { text: "Clearly defined with roles and hierarchies", value: 1 },
+                    { text: "Democratic with voting mechanisms", value: 2 },
+                    { text: "Traceable to specific conflicts it was designed to resolve", value: 3 }
+                ]
+            },
+            {
+                text: "A system that requires automation to function at scale is:",
+                options: [
+                    { text: "Modern and efficient", value: 1 },
+                    { text: "Necessary for growth", value: 2 },
+                    { text: "Hiding decisions that should be visible", value: 3 }
+                ]
+            },
+            {
+                text: "When people disagree about what a system should do, the solution is:",
+                options: [
+                    { text: "Vote and implement the majority preference", value: 1 },
+                    { text: "Find a compromise everyone can accept", value: 2 },
+                    { text: "Design a process where disagreement remains visible and negotiable", value: 3 }
+                ]
+            },
+            {
+                text: "The best indicator that a system has reached optimal size is:",
+                options: [
+                    { text: "Growth metrics plateau", value: 1 },
+                    { text: "User satisfaction is high", value: 2 },
+                    { text: "Adding one more person degrades connection quality", value: 3 }
+                ]
+            },
+            {
+                text: "Material constraints (time, resources, physical limits) are:",
+                options: [
+                    { text: "Problems to solve with better design", value: 1 },
+                    { text: "Trade-offs to manage strategically", value: 2 },
+                    { text: "Truth generators that reveal what actually matters", value: 3 }
+                ]
+            },
+            {
+                text: "When urgency forces fast decisions, the right approach is:",
+                options: [
+                    { text: "Empower leaders to decide quickly", value: 1 },
+                    { text: "Use pre-established crisis protocols", value: 2 },
+                    { text: "Identify which decisions cannot be rushed and protect them", value: 3 }
+                ]
+            },
+            {
+                text: "A system should be considered successful when:",
+                options: [
+                    { text: "It achieves its stated goals efficiently", value: 1 },
+                    { text: "It scales to serve more people", value: 2 },
+                    { text: "It remains coherent when compressed to human scale", value: 3 }
+                ]
+            },
+            {
+                text: "Network effects (value from connections) should primarily be achieved through:",
+                options: [
+                    { text: "Growth—more users create more value", value: 1 },
+                    { text: "Features that encourage engagement", value: 2 },
+                    { text: "Density—deeper connections without expansion", value: 3 }
+                ]
+            },
+            {
+                text: "Your philosophy on system design is:",
+                options: [
+                    { text: "Build for the ideal state and iterate based on feedback", value: 1 },
+                    { text: "Start simple and add complexity as needed", value: 2 },
+                    { text: "Build small, force failure, rebuild based on what broke", value: 3 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+        
+        function initQuiz() {
+            renderQuestion();
+            updateProgress();
+        }
+        
+        function renderQuestion() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            const q = questions[currentQuestion];
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question active';
+            questionDiv.innerHTML = `
+                <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                <div class="question-text">${q.text}</div>
+                ${q.options.map((opt, idx) => `
+                    <div class="option ${answers[currentQuestion] === opt.value ? 'selected' : ''}" 
+                         onclick="selectOption(${opt.value})">
+                        ${opt.text}
+                    </div>
+                `).join('')}
+            `;
+            container.appendChild(questionDiv);
+        }
+        
+        function selectOption(value) {
+            answers[currentQuestion] = value;
+            renderQuestion();
+            
+            // Auto-advance after selection
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    nextQuestion();
+                } else {
+                    showEmailSection();
+                }
+            }, 300);
+        }
+        
+        function nextQuestion() {
+            if (!answers[currentQuestion]) return;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                updateProgress();
+                updateButtons();
+            } else {
+                showEmailSection();
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                updateProgress();
+                updateButtons();
+            }
+        }
+        
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function updateButtons() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.style.display = currentQuestion > 0 ? 'block' : 'none';
+            nextBtn.disabled = !answers[currentQuestion];
+        }
+        
+        function showEmailSection() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('nav-buttons').style.display = 'none';
+            document.getElementById('email-section').classList.add('active');
+        }
+        
+        function submitQuiz() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            if (!name || !email) {
+                alert('Please enter both name and email');
+                return;
+            }
+            
+            const score = answers.reduce((sum, val) => sum + val, 0);
+            
+            // Send analytics
+            sendAnalytics({
+                name,
+                email,
+                score,
+                answers,
+                timestamp: new Date().toISOString()
+            });
+            
+            showResults(score, name, email);
+        }
+        
+        function showResults(score, name, email) {
+            let level, levelName, resultClass, description;
+            
+            if (score <= 20) {
+                level = 'low';
+                levelName = 'Foundational Track';
+                resultClass = 'result-low';
+                description = `
+                    <p>You approach systems from a traditional perspective, which is perfect for this course. You'll begin with Module 1 and progress through the full compression framework.</p>
+                    <p><strong>Your Learning Path:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Start with Semester 1: Discovery of Local Truth</li>
+                        <li>Focus on understanding compression before friction</li>
+                        <li>Expect significant paradigm shifts in how you view scale</li>
+                    </ul>
+                `;
+            } else if (score <= 35) {
+                level = 'medium';
+                levelName = 'Intermediate Track';
+                resultClass = 'result-medium';
+                description = `
+                    <p>You already understand that scale has costs and friction carries information. You'll move through the foundational modules quickly and spend more time on governance and constraint reality.</p>
+                    <p><strong>Your Learning Path:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Accelerated Semester 1 with deeper exercises</li>
+                        <li>Extended focus on Semester 2: Constraint Reality</li>
+                        <li>Additional contradiction injection assignments</li>
+                    </ul>
+                `;
+            } else {
+                level = 'high';
+                levelName = 'Advanced Track';
+                resultClass = 'result-high';
+                description = `
+                    <p>You think in terms of compression, proximity, and structural truth. Your track includes advanced contradiction assignments from day one.</p>
+                    <p><strong>Your Learning Path:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Immediate contradiction injection exercises</li>
+                        <li>Peer teaching responsibilities in Semester 1</li>
+                        <li>Advanced decompression event with pattern synthesis</li>
+                    </ul>
+                `;
+            }
+            
+            document.getElementById('email-section').style.display = 'none';
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result ${resultClass} active`;
+            document.getElementById('result-title').textContent = `Your Track: ${levelName}`;
+            document.getElementById('result-content').innerHTML = description + `
+                <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                    <strong>Next Steps:</strong> Confirmation email sent to <strong>${email}</strong>. 
+                    Course begins when 15 students are enrolled. Share this assessment with others who think in systems.
+                </p>
+            `;
+            
+            setupShareLinks(levelName);
+        }
+        
+        function setupShareLinks(levelName) {
+            const shareText = `I just took the Local Systems Theory assessment and qualified for the ${levelName}! 🧠 Learn about systems that survive compression at human scale.`;
+            const shareUrl = window.location.href;
+            
+            document.getElementById('share-twitter').href = 
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('share-linkedin').href = 
+                `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('share-facebook').href = 
+                `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+            document.getElementById('share-whatsapp').href = 
+                `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+        }
+        
+        function sendAnalytics(data) {
+            // In production, this would POST to backend
+            console.log('Analytics Data:', data);
+            
+            // For demo: send to Google Analytics, Mixpanel, or custom endpoint
+            // Example: fetch('/api/analytics', { method: 'POST', body: JSON.stringify(data) });
+            
+            // Email notification (requires backend)
+            // Example: fetch('/api/notify', { method: 'POST', body: JSON.stringify(data) });
+        }
+        
+        // Initialize quiz on load
+        initQuiz();
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LST System</title>
+<style>
+body { font-family: Arial; background:#111; color:#eee; padding:20px; }
+.panel { border:1px solid #444; padding:10px; margin-top:20px; }
+button { margin:5px; padding:10px; background:#222; color:#eee; border:1px solid #555; cursor:pointer;}
+#content { margin-top:20px; font-size:18px;}
+</style>
+</head>
+<body>
+
+<h1>This system will not stay stable</h1>
+
+<div id="content">
+You are currently in a stable state. Everything appears coherent.
+</div>
+
+<div class="panel">
+<h3>Student Interaction</h3>
+<button onclick="interact()">Engage</button>
+</div>
+
+<div class="panel">
+<h3>Instructor Control Panel</h3>
+<button onclick="collapse()">Collapse</button>
+<button onclick="confuse()">Confuse</button>
+<button onclick="addFriction()">Add Friction</button>
+<button onclick="reset()">Reset Stability</button>
+</div>
+
+<script>
+let state = "stable";
+
+function interact(){
+ document.getElementById("content").innerHTML =
+ "Your current approach is working. For now.";
+}
+
+function collapse(){
+ state="collapse";
+ document.getElementById("content").innerHTML =
+ "Your method no longer works under these conditions.";
+}
+
+function confuse(){
+ state="confuse";
+ document.getElementById("content").innerHTML =
+ "Multiple interpretations now exist. None resolve cleanly.";
+}
+
+function addFriction(){
+ state="friction";
+ document.getElementById("content").innerHTML =
+ "You must act with incomplete information and limited time.";
+}
+
+function reset(){
+ state="stable";
+ document.getElementById("content").innerHTML =
+ "The system appears stable again. That does not mean it is.";
+}
+</script>
+
+</body>
+</html>
