@@ -1,68 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>LST System</title>
-<style>
-body { font-family: Arial; background:#111; color:#eee; padding:20px; }
-.panel { border:1px solid #444; padding:10px; margin-top:20px; }
-button { margin:5px; padding:10px; background:#222; color:#eee; border:1px solid #555; cursor:pointer;}
-#content { margin-top:20px; font-size:18px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LST • Initiation Door</title>
+    <meta property="og:title" content="Local Systems Theory • Initiation Door">
+    <meta property="og:description" content="A compact entry point into Local Systems Theory. Enter when you're ready to test your assumptions.">
+    <meta property="og:image" content="https://localsystems.theory/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-soft: #121224;
+            --text: #e6e6e6;
+            --muted: #b3b3b3;
+            --violet: #8b5cf6;
+            --pink: #ec4899;
+            --line: rgba(139, 92, 246, 0.35);
+            --glass: rgba(8, 8, 14, 0.82);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 1rem;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(236, 72, 153, 0.18) 0%, transparent 48%),
+                linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 100%);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Arial, sans-serif;
+        }
+
+        .door {
+            width: min(100%, 680px);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--glass);
+            box-shadow: 0 10px 48px rgba(139, 92, 246, 0.24);
+            padding: clamp(1.3rem, 2.5vw, 2rem);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: clamp(1.8rem, 4.2vw, 2.7rem);
+            background: linear-gradient(90deg, var(--violet), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .hook {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-style: italic;
+            border-left: 3px solid var(--pink);
+            padding-left: 1rem;
+            line-height: 1.55;
+            color: #d8d8e8;
+            margin-bottom: 1.3rem;
+        }
+
+        #output {
+            min-height: 86px;
+            border: 1px solid rgba(139, 92, 246, 0.28);
+            background: rgba(139, 92, 246, 0.06);
+            border-radius: 12px;
+            padding: 0.9rem;
+            color: #d9d9f6;
+            line-height: 1.45;
+            margin-bottom: 1rem;
+            transition: opacity 0.35s ease;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        button,
+        .cta {
+            border: 1px solid var(--violet);
+            background: transparent;
+            color: var(--text);
+            padding: 0.65rem 0.95rem;
+            border-radius: 10px;
+            font-size: 0.96rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover,
+        .cta:hover {
+            transform: translateY(-1px);
+            background: rgba(139, 92, 246, 0.16);
+        }
+
+        .cta.primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, var(--violet), #7c3aed);
+            font-weight: 600;
+        }
+
+        .cta.primary:hover {
+            background: linear-gradient(135deg, #9a6bfd, #8754f2);
+        }
+
+        .unstable {
+            animation: flicker 1.2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from { opacity: 0.62; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
+    <main class="door">
+        <h1>LOCAL SYSTEMS THEORY</h1>
+        <p class="subtitle">A small door to a destabilizing idea.</p>
 
-<h1>This system will not stay stable</h1>
+        <div class="hook">
+            Your best ideas will not survive contact here.<br>
+            Scale is amnesia distributed across distance.<br>
+            Enter only if you're willing to be wrong.
+        </div>
 
-<div id="content">
-You are currently in a stable state. Everything appears coherent.
-</div>
+        <div id="output">You are currently in a coherent state. That does not mean it is true.</div>
 
-<div class="panel">
-<h3>Student Interaction</h3>
-<button onclick="interact()">Engage</button>
-</div>
+        <div class="actions">
+            <button onclick="compress()">Compress</button>
+            <button onclick="collapse()">Collapse</button>
+            <button onclick="friction()">Inject Friction</button>
+            <button onclick="resetState()">Reset</button>
+            <a class="cta primary" href="LST_Shareable_Quiz.html">Enter the Assessment →</a>
+        </div>
+    </main>
 
-<div class="panel">
-<h3>Instructor Control Panel</h3>
-<button onclick="collapse()">Collapse</button>
-<button onclick="confuse()">Confuse</button>
-<button onclick="addFriction()">Add Friction</button>
-<button onclick="reset()">Reset Stability</button>
-</div>
+    <script>
+        let phase = 0;
+        const messages = [
+            'Phase 1: Induced Stability. Patterns form. Confidence builds. This is intentional.',
+            'Phase 2: Collapse. Core assumptions removed. Nothing works the way it did.',
+            'Phase 3: Confusion. Multiple truths compete. None resolve cleanly.',
+            'Phase 4: Struggle. You must act without clarity. Trial replaces certainty.',
+            'Phase 5: Adaptation. Something flexible begins to emerge from the wreckage.',
+            'Final: Removal. All frameworks dismantled. What remains is local truth... or nothing.'
+        ];
 
-<script>
-let state = "stable";
+        function updateOutput(text, unstable = false) {
+            const out = document.getElementById('output');
+            out.textContent = text;
+            out.classList.toggle('unstable', unstable);
+        }
 
-function interact(){
- document.getElementById("content").innerHTML =
- "Your current approach is working. For now.";
-}
+        function compress() {
+            phase = (phase + 1) % messages.length;
+            updateOutput(messages[phase], true);
+        }
 
-function collapse(){
- state="collapse";
- document.getElementById("content").innerHTML =
- "Your method no longer works under these conditions.";
-}
+        function collapse() {
+            updateOutput('Your method no longer works under these conditions. What broke first?', true);
+        }
 
-function confuse(){
- state="confuse";
- document.getElementById("content").innerHTML =
- "Multiple interpretations now exist. None resolve cleanly.";
-}
+        function friction() {
+            updateOutput('Friction is not waste. It is diagnostic. Where does the system resist... and why?', true);
+        }
 
-function addFriction(){
- state="friction";
- document.getElementById("content").innerHTML =
- "You must act with incomplete information and limited time.";
-}
+        function resetState() {
+            phase = 0;
+            updateOutput('The system appears stable again. That does not mean it is.', false);
+        }
 
-function reset(){
- state="stable";
- document.getElementById("content").innerHTML =
- "The system appears stable again. That does not mean it is.";
-}
-</script>
+        setInterval(() => {
+            if (Math.random() > 0.75) {
+                const out = document.getElementById('output');
+                out.style.opacity = '0.45';
+                setTimeout(() => { out.style.opacity = '0.88'; }, 170);
+            }
+        }, 8500);
 
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'k') {
+                updateOutput('Knowledge is compression. Wisdom is what survives when you remove everything else.', true);
+            }
+        });
+    </script>
 </body>
 </html>
