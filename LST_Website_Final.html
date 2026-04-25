@@ -1,68 +1,254 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>LST System</title>
-<style>
-body { font-family: Arial; background:#111; color:#eee; padding:20px; }
-.panel { border:1px solid #444; padding:10px; margin-top:20px; }
-button { margin:5px; padding:10px; background:#222; color:#eee; border:1px solid #555; cursor:pointer;}
-#content { margin-top:20px; font-size:18px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LST • Initiation Door</title>
+    <style>
+        :root {
+            --bg-0: #050505;
+            --bg-1: #0f0b16;
+            --card: rgba(12, 12, 18, 0.9);
+            --text: #e8e8ef;
+            --muted: #a5a6b2;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --blue: #3b82f6;
+            --border: rgba(139, 92, 246, 0.36);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 5%, rgba(139, 92, 246, 0.18), transparent 38%),
+                radial-gradient(circle at 90% 85%, rgba(236, 72, 153, 0.14), transparent 42%),
+                linear-gradient(140deg, var(--bg-0), var(--bg-1));
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .door {
+            width: min(980px, 100%);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: clamp(1.1rem, 2.5vw, 2rem);
+            background: var(--card);
+            box-shadow: 0 0 42px rgba(139, 92, 246, 0.23);
+            backdrop-filter: blur(4px);
+        }
+
+        .title {
+            margin: 0;
+            font-size: clamp(1.9rem, 5vw, 3rem);
+            line-height: 1.08;
+            letter-spacing: -1.4px;
+            background: linear-gradient(95deg, var(--purple), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            margin: 0.65rem auto 1.4rem;
+            max-width: 62ch;
+            font-size: clamp(0.98rem, 2vw, 1.1rem);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .panel {
+            border: 1px solid rgba(139, 92, 246, 0.24);
+            border-radius: 14px;
+            background: rgba(8, 8, 12, 0.65);
+            padding: 1rem 1rem 1.2rem;
+        }
+
+        .panel h2 {
+            margin: 0 0 0.6rem;
+            font-size: 1.2rem;
+            color: #f2efff;
+        }
+
+        .hook {
+            margin: 0;
+            font-style: italic;
+            color: #dfd4ff;
+            opacity: 0.92;
+            border-left: 3px solid var(--pink);
+            padding-left: 1rem;
+            line-height: 1.55;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1rem;
+        }
+
+        button,
+        .link-button {
+            border: 1px solid rgba(139, 92, 246, 0.78);
+            background: transparent;
+            color: var(--text);
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            font-size: 0.96rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 220ms ease;
+            font-family: inherit;
+        }
+
+        button:hover,
+        .link-button:hover {
+            transform: translateY(-1px);
+            background: rgba(139, 92, 246, 0.9);
+            color: #09070f;
+            box-shadow: 0 7px 22px rgba(139, 92, 246, 0.34);
+        }
+
+        .link-button.alt {
+            border-color: rgba(59, 130, 246, 0.7);
+        }
+
+        #content {
+            margin-top: 1rem;
+            padding: 0.85rem;
+            border-radius: 10px;
+            min-height: 96px;
+            border: 1px solid rgba(236, 72, 153, 0.28);
+            background: rgba(236, 72, 153, 0.08);
+            line-height: 1.45;
+            font-size: 1rem;
+            opacity: 0.9;
+            transition: opacity 0.5s ease;
+        }
+
+        .unstable {
+            animation: flicker 1.2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.58; }
+            100% { opacity: 1; }
+        }
+
+        .microcopy {
+            margin-top: 0.85rem;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        @media (min-width: 860px) {
+            .layout {
+                grid-template-columns: 1.05fr 0.95fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <main class="door">
+        <h1 class="title">LOCAL SYSTEMS THEORY</h1>
+        <p class="subtitle">A compact front door for social posts: same message, stronger atmosphere, and clean paths into the experience.</p>
 
-<h1>This system will not stay stable</h1>
+        <section class="layout">
+            <article class="panel">
+                <h2>Initiation Door</h2>
+                <p class="hook">
+                    Your best ideas will not survive contact here.<br>
+                    Scale is amnesia distributed across distance.<br>
+                    Enter only if you're willing to be wrong.
+                </p>
+                <div class="actions">
+                    <a class="link-button" href="LST_Shareable_Quiz.html">Take the 15-Question Assessment</a>
+                    <a class="link-button alt" href="Social_Media_Advertisements.md">Use Social Caption Copy</a>
+                </div>
+                <p class="microcopy">Use this page as the lightweight entry link in posts. The deeper chaos controls remain available below.</p>
+            </article>
 
-<div id="content">
-You are currently in a stable state. Everything appears coherent.
-</div>
+            <article class="panel">
+                <h2>Live Instability Console</h2>
+                <div class="actions">
+                    <button onclick="compress()">Compress My Thinking</button>
+                    <button onclick="collapse()">Force Collapse</button>
+                    <button onclick="friction()">Inject Friction</button>
+                    <button onclick="reset()">Reset (for now)</button>
+                </div>
+                <div id="content">You are currently in a coherent state. That does not mean it is true.</div>
+            </article>
+        </section>
+    </main>
 
-<div class="panel">
-<h3>Student Interaction</h3>
-<button onclick="interact()">Engage</button>
-</div>
+    <script>
+        let phase = 0;
+        const messages = [
+            "Phase 1: Induced Stability. Patterns form. Confidence builds. This is intentional.",
+            "Phase 2: Collapse. Core assumptions removed. Nothing works the way it did.",
+            "Phase 3: Confusion. Multiple truths compete. None resolve cleanly.",
+            "Phase 4: Struggle. You must act without clarity. Trial replaces certainty.",
+            "Phase 5: Adaptation. Something flexible begins to emerge from the wreckage.",
+            "Final: Removal. All frameworks dismantled. What remains is local truth... or nothing."
+        ];
 
-<div class="panel">
-<h3>Instructor Control Panel</h3>
-<button onclick="collapse()">Collapse</button>
-<button onclick="confuse()">Confuse</button>
-<button onclick="addFriction()">Add Friction</button>
-<button onclick="reset()">Reset Stability</button>
-</div>
+        function updateOutput(text, unstable = false) {
+            const out = document.getElementById("content");
+            out.innerHTML = text;
+            if (unstable) {
+                out.classList.add("unstable");
+            } else {
+                out.classList.remove("unstable");
+            }
+        }
 
-<script>
-let state = "stable";
+        function compress() {
+            phase = (phase + 1) % messages.length;
+            updateOutput(messages[phase], true);
+        }
 
-function interact(){
- document.getElementById("content").innerHTML =
- "Your current approach is working. For now.";
-}
+        function collapse() {
+            updateOutput("Your method no longer works under these conditions. What broke first?", true);
+        }
 
-function collapse(){
- state="collapse";
- document.getElementById("content").innerHTML =
- "Your method no longer works under these conditions.";
-}
+        function friction() {
+            updateOutput("Friction is not waste. It is diagnostic. Where does the system resist... and why?", true);
+        }
 
-function confuse(){
- state="confuse";
- document.getElementById("content").innerHTML =
- "Multiple interpretations now exist. None resolve cleanly.";
-}
+        function reset() {
+            phase = 0;
+            updateOutput("The system appears stable again. That does not mean it is.", false);
+        }
 
-function addFriction(){
- state="friction";
- document.getElementById("content").innerHTML =
- "You must act with incomplete information and limited time.";
-}
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                const out = document.getElementById("content");
+                out.style.opacity = "0.38";
+                setTimeout(() => {
+                    out.style.opacity = "0.9";
+                }, 170);
+            }
+        }, 8000);
 
-function reset(){
- state="stable";
- document.getElementById("content").innerHTML =
- "The system appears stable again. That does not mean it is.";
-}
-</script>
-
+        document.addEventListener("keydown", (event) => {
+            if (event.key.toLowerCase() === "k") {
+                updateOutput("Knowledge is compression. Wisdom is what survives when you remove everything else.", true);
+            }
+        });
+    </script>
 </body>
 </html>
